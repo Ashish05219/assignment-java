@@ -1,0 +1,35 @@
+import java.util.Scanner;
+
+public class ShortestManhattanDistance {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int[] startPoint = new int[2];
+        startPoint[0] = scanner.nextInt();
+        startPoint[1] = scanner.nextInt();
+        String input = scanner.next();
+        scanner.close();
+        int[] endPoint = new int[2];
+        endPoint[0] = startPoint[0];
+        endPoint[1] = startPoint[1];
+        for (char c : input.toCharArray()) {
+            switch (c) {
+                case 'N':
+                    endPoint[1]++;
+                    break;
+                case 'S':
+                    endPoint[1]--;
+                    break;
+                case 'E':
+                    endPoint[0]++;
+                    break;
+                case 'W':
+                    endPoint[0]--;
+                    break;
+            }
+        }
+        int deltaX = endPoint[0] - startPoint[0];
+        int deltaY = endPoint[1] - startPoint[1];
+        double distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+        System.out.println(distance);
+    }
+}
