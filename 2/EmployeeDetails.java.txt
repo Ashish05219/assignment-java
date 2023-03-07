@@ -1,0 +1,36 @@
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+
+public class EmployeeDetails {
+    public static void main(String[] args) throws IOException {
+        BufferedReader reader = new BufferedReader(new FileReader("employees.csv"));
+        BufferedWriter managerWriter = new BufferedWriter(new FileWriter("managers.csv"));
+        BufferedWriter singleNameWriter = new BufferedWriter(new FileWriter("single_name_employees.csv"));
+
+        // Read the file line by line
+        String line;
+        while ((line = reader.readLine()) != null) {
+            String[] fields = line.split(",");
+
+            // Check if the employee is a manager in the R&D division
+            if (fields[1].equals("Manager") && fields[2].equals("R&D")) {
+                managerWriter.write(line);
+                managerWriter.newLine();
+            }
+
+            // Check if the employee does not have a last name
+            if (!fields[0].contains(" ")) {
+                singleNameWriter.write(line);
+                singleNameWriter.newLine();
+            }
+        }
+
+        // Close the readers and writers
+        reader.close();
+        managerWriter.close();
+        singleNameWriter.close();
+    }
+}
